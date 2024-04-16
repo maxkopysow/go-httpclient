@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/maxkopysow/go-httpclient.git/gohttp"
+	"github.com/maxkopysow/go-httpclient/gohttp"
 )
 
 func TestMain(m *testing.M) {

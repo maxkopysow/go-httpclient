@@ -3,7 +3,6 @@ package gohttp
 import (
 	"crypto/md5"
 	"encoding/hex"
-	"errors"
 	"fmt"
 	"strings"
 	"sync"
@@ -80,6 +79,6 @@ func (m *mockServer) getMock(method, url, body string) *Mock {
 	}
 
 	return &Mock{
-		Error: errors.New(fmt.Sprintf("no mock matching %s from '%s' with given body", method, url)),
+		Error: fmt.Errorf("no mock matching %s from '%s' with given body", method, url),
 	}
 }
