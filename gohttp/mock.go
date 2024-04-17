@@ -5,6 +5,8 @@ import (
 	"net/http"
 )
 
+// Provides a clean way to counfigure HTTP mocks
+// based on combination between request method, URL and request body.
 type Mock struct {
 	Method      string
 	Url         string
@@ -15,6 +17,7 @@ type Mock struct {
 	Error              error
 }
 
+// Returns a Response object based on the mock configuration
 func (m *Mock) GetResponse() (*Response, error) {
 	if m.Error != nil {
 		return nil, m.Error
