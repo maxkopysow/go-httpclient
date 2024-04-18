@@ -6,14 +6,14 @@ A production-ready HTTP client in Go with lots of useful features and using noth
 
 ```bash
 # Go Modules
-require github.com/federicoleon/go-httpclient
+require github.com/maxkopysow/go-httpclient
 ```
 
 ## Usage
 In order to use the library for making HTTP calls you need to import the corresponding HTTP package:
 
 ```go
-import "github.com/federicoleon/go-httpclient/gohttp"
+import "github.com/maxkopysow/go-httpclient/gohttp"
 ```
 
 ## Configuring the client
@@ -134,7 +134,7 @@ The library provides a convenient package for mocking requests and getting a par
 In order to use the mocking features you need to import the corresponding package:
 
 ```go
-import "github.com/federicoleon/go-httpclient/gohttp_mock"
+import "github.com/maxkopysow/go-httpclient/gohttp_mock"
 ```
 
 ### Starting the mock server:
