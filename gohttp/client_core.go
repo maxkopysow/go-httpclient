@@ -38,7 +38,11 @@ func (c *httpClient) getRequestBody(contentType string, body interface{}) ([]byt
 	}
 }
 
-func (c *httpClient) getHttpClient() *http.Client {
+func (c *httpClient) getHttpClient() core.HttpClient {
+
+	if gohttp_mock.MockupServer.IsEnabled() {
+		return gohttp_mock.MockupServer.GetMockedClient()
+	}
 
 	c.clientOnce.Do(func() {
 		if c.builder.client != nil {
@@ -73,10 +77,6 @@ func (c *httpClient) do(method string, url string, headers http.Header, body int
 		return nil, err
 	}
 
-	if mock := gohttp_mock.GetMock(method, url, string(requestBody)); mock != nil {
-		return mock.GetResponse()
-	}
-
 	request, err := http.NewRequest(method, url, bytes.NewBuffer(requestBody))
 
 	if err != nil {
@@ -90,14 +90,16 @@ func (c *httpClient) do(method string, url string, headers http.Header, body int
 	client := c.getHttpClient()
 
 	response, err := client.Do(request)
+
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	defer response.Body.Close()
 	responseBody, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		panic(err)
+		return nil, err
+
 	}
 
 	finalResponse := core.Response{
